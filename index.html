@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Nigerian Tax Calculator - Calculate your PAYE, VAT, and other taxes">
+    <title>NaijaTax Calculator 🇳🇬</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="icons/icon-192.png">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon">🇳🇬</div>
+                <h1>NaijaTax <span>Calculator</span></h1>
+            </div>
+            <p class="tagline">Calculate your Nigerian taxes in seconds</p>
+        </header>
+
+        <!-- Main Calculator -->
+        <main class="calculator">
+            <!-- Income Section -->
+            <section class="input-section">
+                <div class="section-header">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <h2>Income Details</h2>
+                </div>
+                
+                <div class="input-group">
+                    <label for="monthly-income">
+                        <i class="fas fa-wallet"></i> Monthly Basic Salary (₦)
+                    </label>
+                    <div class="input-with-icon">
+                        <span class="currency">₦</span>
+                        <input type="number" id="monthly-income" placeholder="e.g., 500000" min="0" step="1000">
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="allowances">
+                        <i class="fas fa-plus-circle"></i> Monthly Allowances (₦)
+                    </label>
+                    <div class="input-with-icon">
+                        <span class="currency">₦</span>
+                        <input type="number" id="allowances" placeholder="e.g., 100000" min="0" step="1000">
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="housing">
+                        <i class="fas fa-home"></i> Housing Deduction (₦)
+                    </label>
+                    <div class="input-with-icon">
+                        <span class="currency">₦</span>
+                        <input type="number" id="housing" placeholder="e.g., 50000" min="0" step="1000">
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="pension">
+                        <i class="fas fa-piggy-bank"></i> Pension Contribution (%)
+                    </label>
+                    <div class="input-with-icon">
+                        <span class="percent">%</span>
+                        <input type="number" id="pension" placeholder="8" min="0" max="100" step="0.1" value="8">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tax Type Selector -->
+            <section class="tax-type-section">
+                <div class="section-header">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                    <h2>Select Tax Types</h2>
+                </div>
+                
+                <div class="checkbox-group">
+                    <label class="checkbox">
+                        <input type="checkbox" id="paye" checked>
+                        <span class="checkmark"></span>
+                        PAYE (Personal Income Tax)
+                    </label>
+                    
+                    <label class="checkbox">
+                        <input type="checkbox" id="vat" checked>
+                        <span class="checkmark"></span>
+                        VAT (7.5%)
+                    </label>
+                    
+                    <label class="checkbox">
+                        <input type="checkbox" id="nsitf">
+                        <span class="checkmark"></span>
+                        NSITF (1%)
+                    </label>
+                    
+                    <label class="checkbox">
+                        <input type="checkbox" id="nhf">
+                        <span class="checkmark"></span>
+                        NHF (2.5%)
+                    </label>
+                </div>
+            </section>
+
+            <!-- Calculate Button -->
+            <div class="calculate-btn-container">
+                <button id="calculate-btn" class="calculate-btn">
+                    <i class="fas fa-calculator"></i> Calculate My Taxes
+                </button>
+            </div>
+
+            <!-- Results Section -->
+            <section class="results-section" id="results">
+                <div class="section-header">
+                    <i class="fas fa-chart-pie"></i>
+                    <h2>Tax Breakdown</h2>
+                </div>
+                
+                <div class="results-grid">
+                    <div class="result-card">
+                        <div class="result-label">Annual Gross Income</div>
+                        <div class="result-value" id="annual-gross">₦ 0</div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <div class="result-label">Total Tax Payable</div>
+                        <div class="result-value highlight" id="total-tax">₦ 0</div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <div class="result-label">Annual Net Income</div>
+                        <div class="result-value" id="annual-net">₦ 0</div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <div class="result-label">Monthly Take-home</div>
+                        <div class="result-value" id="monthly-net">₦ 0</div>
+                    </div>
+                </div>
+                
+                <!-- Detailed Breakdown -->
+                <div class="detailed-breakdown">
+                    <h3><i class="fas fa-list-alt"></i> Detailed Breakdown</h3>
+                    <div class="breakdown-list">
+                        <div class="breakdown-item">
+                            <span>PAYE Tax</span>
+                            <span id="paye-amount">₦ 0</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span>VAT (7.5%)</span>
+                            <span id="vat-amount">₦ 0</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span>NSITF (1%)</span>
+                            <span id="nsitf-amount">₦ 0</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span>NHF (2.5%)</span>
+                            <span id="nhf-amount">₦ 0</span>
+                        </div>
+                        <div class="breakdown-item total">
+                            <span>Total Deductions</span>
+                            <span id="total-deductions">₦ 0</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Share Section -->
+            <section class="share-section">
+                <h3><i class="fas fa-share-alt"></i> Share with Friends</h3>
+                <p>Help your Facebook friends calculate their taxes too!</p>
+                <div class="share-buttons">
+                    <button class="share-btn facebook" id="share-facebook">
+                        <i class="fab fa-facebook-f"></i> Share on Facebook
+                    </button>
+                    <button class="share-btn whatsapp" id="share-whatsapp">
+                        <i class="fab fa-whatsapp"></i> Share on WhatsApp
+                    </button>
+                    <button class="share-btn twitter" id="share-twitter">
+                        <i class="fab fa-twitter"></i> Tweet
+                    </button>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="disclaimer">
+                <p><i class="fas fa-exclamation-triangle"></i> <strong>Disclaimer:</strong> This calculator provides estimates based on current Nigerian tax rates. Consult a professional tax advisor for official calculations.</p>
+            </div>
+            <div class="footer-info">
+                <p>Made with ❤️ for Nigerians | Updated for 2024 Tax Year</p>
+                <p class="version">v1.0.0</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
